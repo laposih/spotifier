@@ -1,7 +1,8 @@
 package org.laposi.spotifier.spotify.api;
 
 public enum SpotifyUrl {
-    POST_ACCESS_TOKEN("https://accounts.spotify.com/api/token");
+    POST_ACCESS_TOKEN("https://accounts.spotify.com/api/token"),
+    GET_ARTIST_TOP_TRACKS("https://api.spotify.com/v1/artists/{artist}/top-tracks");
 
     private String url;
 
