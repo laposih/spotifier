@@ -45,5 +45,12 @@ public class AuthorizationService {
                 postForEntity(SpotifyUrl.POST_ACCESS_TOKEN.url(), request, AccessTokenResponse.class);
         return response.getBody().getAccessToken();
     }
+
+    public HttpHeaders createAuthorizationHeader() {
+        String accessToken = this.getAccessToken();
+        HttpHeaders header = new HttpHeaders();
+        header.add("Authorization", "Bearer " + accessToken);
+        return header;
+    }
 }
 
