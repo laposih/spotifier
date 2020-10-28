@@ -5,7 +5,6 @@ import org.laposi.spotifier.spotify.api.SpotifyUrl;
 import org.laposi.spotifier.spotify.api.dto.TopTracksResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,10 +27,7 @@ public class TrackService {
     }
 
     public TopTracks getTopTracks(String artist, String country) {
-        String accessToken = authorizationService.getAccessToken();
-        HttpHeaders header = new HttpHeaders();
-        header.add("Authorization", "Bearer " + accessToken);
-        HttpEntity<Object> request = new HttpEntity<>(null, header);
+        HttpEntity<Object> request = new HttpEntity<>(null, authorizationService.createAuthorizationHeader());
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(SpotifyUrl.GET_ARTIST_TOP_TRACKS.url())
                 .queryParam("country", country)
                 .buildAndExpand(artist);
